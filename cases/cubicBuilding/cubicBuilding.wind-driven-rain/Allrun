@@ -23,10 +23,10 @@ echo "Running changeDictionary app..."
 runApplication changeDictionary
 
 ## Serial run
-runApplication ../../../bin/windDrivenRain
+runApplication ../../../bin/wind-driven-rain
 
 ## Parallel run
 # runApplication decomposePar
-# runParallel ../../../bin/windDrivenRain 8
+# runParallel ../../../bin/wind-driven-rain 8
 # runApplication reconstructPar -latestTime
 

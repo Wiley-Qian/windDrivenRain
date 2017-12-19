@@ -1,4 +1,6 @@
-updateValues.C
-windDrivenRain.C
+timex.cpp
+field_factory.cpp
+update_values.cpp
+wind_driven_rain.cpp
 
-EXE = ../bin/windDrivenRain
+EXE = ../bin/wind-driven-rain

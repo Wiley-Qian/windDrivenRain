@@ -19,18 +19,17 @@ gradSchemes
 
 divSchemes
 {
-  default Gauss linear;
+  default none;
 
-  div(phi,alpha) bounded Gauss upwind;          
-  div(phi,U) bounded Gauss upwind;
-  div((-nutrain*T(grad(U)))) Gauss linear;
+  div(phi,alphar) bounded Gauss vanLeer;          
+  div(phi,Ur) bounded Gauss vanLeerV;
+
+  div((-nutrain*T(grad(Ur)))) Gauss linear;
 }
 
 laplacianSchemes
 {
-  default         none;
-
-  laplacian(nutrain,U) Gauss linear corrected;
+  default Gauss linear orthogonal;
 }
 
 interpolationSchemes
@@ -40,7 +39,7 @@ interpolationSchemes
 
 snGradSchemes
 {
-  default corrected;
+  default orthogonal;
 }
 
 // vi: set ft=foam et sw=2 ts=2 sts=2:

@@ -16,11 +16,11 @@ endTime         10000;
 deltaT          1;
 
 writeControl    timeStep;
-writeInterval   1000;
-purgeWrite      0;
+writeInterval   100;
+purgeWrite      2;
 writeFormat     binary;
 writePrecision  6;
-writeCompression uncompressed;
+writeCompression compressed;
 
 timeFormat      general;
 timePrecision   6;

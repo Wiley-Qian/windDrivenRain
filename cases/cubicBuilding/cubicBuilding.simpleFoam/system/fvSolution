@@ -12,57 +12,33 @@ solvers
   p
   {
     solver GAMG;
-    smoother DIC;
-    tolerance 1e-09;
-    relTol 0.001;
-    minIter 3;
-    maxIter 100;
+    smoother DICGaussSeidel;
+    tolerance 1e-8;
+    relTol 3e-1;
   }
 
   U
   {
-    solver smoothSolver;
-    smoother GaussSeidel;
-    tolerance 1e-09;
-    relTol 0.001;
-    nSweeps 1;
-    maxIter 100;
+    solver PBiCG;
+    preconditioner DILU;
+    tolerance 1e-8;
+    relTol 1e-1;
   }
 
   k
   {
-    solver smoothSolver;
-    smoother GaussSeidel;
-    tolerance 1e-09;
-    relTol 0.001;
-    nSweeps 1;
-    maxIter 100;
+    solver PBiCG;
+    preconditioner DILU;
+    tolerance 1e-8;
+    relTol 1e-1;
   }
 
   epsilon
   {
-    solver smoothSolver;
-    smoother GaussSeidel;
-    tolerance 1e-09;
-    relTol 0.001;
-    nSweeps 1;
-    maxIter 100;
-  }
-
-  R
-  {
     solver PBiCG;
     preconditioner DILU;
-    tolerance 1e-06;
-    relTol 0.001;
-  }
-
-  nuTilda
-  {
-    solver PBiCG;
-    preconditioner DILU;
-    tolerance 1e-06;
-    relTol 0.001;
+    tolerance 1e-8;
+    relTol 1e-1;
   }
 }
 
@@ -85,8 +61,8 @@ potentialFlow
 
 relaxationFactors
 {
-  p 0.3;
-  "(U|k|epsilon|R|nuTilda)" 0.7;
+  p 0.2;
+  "(U|k|epsilon)" 0.8;
 }
 
 // vi: set ft=foam et sw=2 ts=2 sts=2:

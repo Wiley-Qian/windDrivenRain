@@ -1,4 +1,19 @@
-#include "updateValues.H"
+// This file is a part of WindDrivenRain.
+//
+// WindDrivenRain is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.
+//
+// WindDrivenRain is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+// or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+// more details.
+//
+// You should have received a copy of the GNU General Public License along with
+// WindDrivenRain. If not, see <http://www.gnu.org/licenses/>.
+
+#include "update_values.hpp"
 
 #include "volFields.H"
 
@@ -19,10 +34,10 @@ inline bool in(const Foam::label i, const Foam::scalar v,
 }
 
 // Interpolate rhoa, mua, and rhop from temperature
-void ethz::getParameters(Foam::dimensionedScalar temp_,
-                         Foam::dimensionedScalar& rhoa_,
-                         Foam::dimensionedScalar& mua_,
-                         Foam::dimensionedScalar& rhop_) {
+void ethz::get_parameters(Foam::dimensionedScalar temp_,
+                          Foam::dimensionedScalar& rhoa_,
+                          Foam::dimensionedScalar& mua_,
+                          Foam::dimensionedScalar& rhop_) {
   using namespace Foam;
 
   const scalar TC = temp_.value() - 273.15;
@@ -64,7 +79,7 @@ void ethz::getParameters(Foam::dimensionedScalar temp_,
 }
 
 // Interpolate CdRe volume field
-Foam::tmp<Foam::volScalarField> ethz::getCdRe(
+Foam::tmp<Foam::volScalarField> ethz::get_CdRe(
     const Foam::volScalarField& Reynolds) {
   using namespace Foam;
 
@@ -88,13 +103,13 @@ Foam::tmp<Foam::volScalarField> ethz::getCdRe(
   forAll(Reynolds, celli) {
     const scalar Rei = Reynolds[celli];
     if (Rei < min(Re_M)) {
-      (*CdRe)[celli] = interpolate(0, Rei, Cd_M, Re_M)*Rei;
+      (*CdRe)[celli] = interpolate(0, Rei, Cd_M, Re_M) * Rei;
     } else if (Rei >= max(Re_M)) {
-      (*CdRe)[celli] = interpolate(32, Rei, Cd_M, Re_M)*Rei;
+      (*CdRe)[celli] = interpolate(32, Rei, Cd_M, Re_M) * Rei;
     } else {
       forAll(Re_M, i) {
         if (not in(i, Rei, Re_M)) continue;
-        (*CdRe)[celli] = interpolate(i, Rei, Cd_M, Re_M)*Rei;
+        (*CdRe)[celli] = interpolate(i, Rei, Cd_M, Re_M) * Rei;
         break;
       }
     }
